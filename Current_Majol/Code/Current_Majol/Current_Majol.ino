@@ -5,7 +5,7 @@
  * Company: IHCO
  * Date : 1399/02/08
 */
-
+#include <avr/wdt.h>
 #include <Filters.h>                       
 #include <SPI.h>
 #include "Classes.h"
@@ -24,7 +24,8 @@ Times CALCULATE_AMPER;
 Times SEND;
 Ampermeter AMP;
 
-void setup() {
+void setup() 
+{
   pinMode(D_ACS_Pin,INPUT);                                                     //Define the pin mode
   if(D_Send_To_Serial)
     Serial.begin(115200); 
@@ -38,6 +39,7 @@ void setup() {
 
 void loop() 
 {
+  wdt_enable(WDTO_500MS);                                                     // enable the watchdog
   CALCULATE_AMPER.ontime();
   SEND.ontime();
   
@@ -45,7 +47,8 @@ void loop()
   inputStats.setWindowSecs( AMP.windowLength );                               //Set the window length
   
   while(true)
-  {   
+  {  
+    wdt_reset();                                                              // uncomment to avoid reboot 
     AMP.ACS_Value = analogRead(D_ACS_Pin);                                    // read the analog in value
     inputStats.input(AMP.ACS_Value);                                          // log to Stats function
         
