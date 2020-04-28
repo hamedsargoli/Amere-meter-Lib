@@ -1,5 +1,5 @@
 /*
- * Amere meter(AC) Majol and commiunication with SPI and IC ACS712-20A || ACS712-30A && ATMEGA8
+ * Amere meter(AC) Majol and commiunication with SPI and IC ACS712-20A || ACS712-30A && ATMEGA8 
  * direct bye : Hamed Sargoli
  * version : 00.04
  * Company: IHCO
